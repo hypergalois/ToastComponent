@@ -1,6 +1,7 @@
 import React from "react";
 
 const ToastContext = React.createContext();
+import useEscapeKey from "../../hooks/useEscapeKey";
 
 export function useToast() {
 	return React.useContext(ToastContext);
@@ -10,19 +11,9 @@ export function ToastProvider({ children }) {
 	// State to hold the objects of the current toasts
 	const [toasts, setToasts] = React.useState([]);
 
-	function checkForEscape(event) {
-		if (event.key === "Escape") {
-			setToasts([]);
-		}
-	}
-
-	React.useEffect(() => {
-		window.addEventListener("keyup", checkForEscape);
-
-		return () => {
-			window.removeEventListener("keyup", checkForEscape);
-		};
-	}, []);
+	useEscapeKey(() => {
+		setToasts([]);
+	});
 
 	// Function to create a new toast
 	function createToast(message, variant, timed = true) {
