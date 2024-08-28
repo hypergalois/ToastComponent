@@ -9,13 +9,12 @@ function ToastShelf() {
 	const { toasts, handleDismissToast } = useToast();
 
 	return (
-		<ol className={styles.wrapper}>
-			{toasts &&
-				toasts.map((toast) => (
-					<li className={styles.toastWrapper} key={toast.id}>
-						<Toast key={toast.id} message={toast.message} variant={toast.variant} dissmissToast={() => handleDismissToast(toast.id)} />
-					</li>
-				))}
+		<ol className={styles.wrapper} role="region" aria-live="polite" aria-label="Notification">
+			{toasts.map((toast) => (
+				<li className={styles.toastWrapper} key={toast.id}>
+					<Toast key={toast.id} message={toast.message} variant={toast.variant} dissmissToast={() => handleDismissToast(toast.id)} />
+				</li>
+			))}
 		</ol>
 	);
 }

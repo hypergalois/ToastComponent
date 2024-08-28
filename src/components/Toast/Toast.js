@@ -18,10 +18,12 @@ function Toast({ message, variant, dissmissToast }) {
 	return (
 		<div className={`${styles.toast} ${styles[variant]}`}>
 			<div className={styles.iconContainer}>{React.createElement(Icon, { size: 24 })}</div>
-			<p className={styles.content}>{message}</p>
-			<button className={styles.closeButton} onClick={dissmissToast}>
+			<p className={styles.content}>
+				<VisuallyHidden>{variant} - </VisuallyHidden>
+				{message}
+			</p>
+			<button className={styles.closeButton} onClick={dissmissToast} aria-label="Dismiss message" aria-live="off">
 				<X size={24} />
-				<VisuallyHidden>Dismiss message</VisuallyHidden>
 			</button>
 		</div>
 	);

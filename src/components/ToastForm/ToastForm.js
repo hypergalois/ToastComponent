@@ -10,20 +10,22 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastForm() {
 	const [message, setMessage] = React.useState("");
 	const [variant, setVariant] = React.useState("notice");
+	const [timed, setTimed] = React.useState(true);
 
-	const { handlePopToast } = useToast();
+	const { createToast } = useToast();
+
+	// Function to handle submitting a new toast
+	function handlePopToast(event) {
+		event.preventDefault();
+
+		createToast(message, variant, timed);
+
+		setMessage("");
+		setVariant("notice");
+	}
 
 	return (
-		<form
-			className={styles.controlsWrapper}
-			onSubmit={(event) => {
-				event.preventDefault();
-				handlePopToast(message, variant);
-				// Clear the message input and reset the variant to "notice"
-				setMessage("");
-				setVariant("notice");
-			}}
-		>
+		<form className={styles.controlsWrapper} onSubmit={handlePopToast}>
 			<div className={styles.row}>
 				<label htmlFor="message" className={styles.label} style={{ alignSelf: "baseline" }}>
 					Message
@@ -58,6 +60,14 @@ function ToastForm() {
 							{variant_option}
 						</label>
 					))}
+				</div>
+			</div>
+
+			<div className={styles.row}>
+				<div className={styles.label}>Timed</div>
+				<div className={styles.inputWrapper}>
+					<input type="checkbox" id="timed" name="timed" checked={timed} onChange={() => setTimed((timed) => !timed)}></input>
+					<label htmlFor="timed">Enable timed toast</label>
 				</div>
 			</div>
 
