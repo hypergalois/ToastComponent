@@ -11,9 +11,11 @@ export function ToastProvider({ children }) {
 	// State to hold the objects of the current toasts
 	const [toasts, setToasts] = React.useState([]);
 
-	useEscapeKey(() => {
+	const handleEscape = React.useCallback(() => {
 		setToasts([]);
-	});
+	}, []);
+
+	useEscapeKey(handleEscape);
 
 	// Function to create a new toast
 	function createToast(message, variant, timed = true) {
