@@ -3,6 +3,8 @@ import React from "react";
 import Button from "../Button";
 import ToastShelf from "../ToastShelf";
 
+import { useToast } from "../../context/ToastProvider";
+
 import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
@@ -11,25 +13,7 @@ function ToastPlayground() {
 	const [message, setMessage] = React.useState("");
 	const [variant, setVariant] = React.useState("notice");
 
-	const [toasts, setToasts] = React.useState([]);
-
-	function handlePopToast() {
-		// Pop a toast with the current message and variant
-		// console.log("Toast popped!", message, variant);
-		const newToast = { id: crypto.randomUUID(), message, variant };
-		setToasts([...toasts, newToast]);
-
-		setTimeout(() => {
-			handleDismissToast(newToast.id);
-		}, 3000);
-
-		setMessage("");
-		setVariant("notice");
-	}
-
-	function handleDismissToast(id) {
-		setToasts((currentToasts) => currentToasts.filter((toast) => toast.id !== id));
-	}
+	const { handlePopToast } = useToast();
 
 	return (
 		<div className={styles.wrapper}>
@@ -38,13 +22,16 @@ function ToastPlayground() {
 				<h1>Toast Playground</h1>
 			</header>
 
-			<ToastShelf toasts={toasts} handleDismissToast={handleDismissToast}></ToastShelf>
+			<ToastShelf></ToastShelf>
 
 			<form
 				className={styles.controlsWrapper}
 				onSubmit={(event) => {
 					event.preventDefault();
-					handlePopToast();
+					handlePopToast(message, variant);
+					// Clear the message input and reset the variant to "notice"
+					setMessage("");
+					setVariant("notice");
 				}}
 			>
 				<div className={styles.row}>
