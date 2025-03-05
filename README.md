@@ -1,17 +1,17 @@
-# Implementación Componente Toast desde 0
+# Toast Component Implementation from Scratch
 
 ![App Screenshot - Idle](./img/1.png)
 ![App Screenshot - Toasts](./img/2.png)
 
-## Descripción
+## Description
 
-Este proyecto es una aplicación de notificaciones Toast construida con React. Los Toasts son mensajes emergentes que aparecen en la parte inferior derecha de la pantalla y desaparecen automáticamente después de un período de tiempo. Puedes personalizar los mensajes, seleccionar entre diferentes variantes (aviso, advertencia, éxito y error), y cerrar los toasts manualmente.
+This project is a Toast notifications application built with React. Toasts are pop-up messages that appear in the bottom right corner of the screen and automatically disappear after a set period. You can customize the messages, choose from different variants (info, warning, success, and error), and manually close the toasts.
 
-### Características
+### Features
 
-- Añadir notificaciones de tipo Toast con diferentes variantes.
-- Cierre automático de los Toasts después de un período determinado.
-- Cierre manual de los Toasts mediante un botón.
-- Descartar todos los Toasts presionando la tecla "Escape".
-- Implementación de un hook personalizado `useEscapeKey` para manejar eventos de teclas.
-- **Accesibilidad mejorada**: Uso de atributos ARIA (`aria-live`, `aria-label`) y el componente `VisuallyHidden` para asegurar que los Toasts sean accesibles y correctamente anunciados por los lectores de pantalla.
+- Add Toast notifications with different variants.
+- Auto-dismiss Toasts after a specified period.
+- Manually close Toasts via a button.
+- Dismiss all Toasts by pressing the "Escape" key.
+- Custom hook `useEscapeKey` implementation to handle keyboard events.
+- **Enhanced Accessibility**: Utilizes ARIA attributes (`aria-live`, `aria-label`) and the `VisuallyHidden` component to ensure that Toasts are accessible and properly announced by screen readers.
